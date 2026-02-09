@@ -6,7 +6,7 @@ CC			= cc
 CFLAGS		= -Wall -Wextra -Werror -g
 
 HEADER_DIR = ./include/
-HEADER_LIST	= 
+HEADER_LIST	= app.h map.h
 HEADER = $(addprefix $(HEADER_DIR), $(HEADER_LIST))
 
 
@@ -15,29 +15,30 @@ MLX_DIR		= ./minilibx-linux/
 MLX	= $(addprefix $(MLX_DIR), libmlx_Linux.a)
 
 INCLUDE	= -I$(MLX_DIR) -I$(HEADER_DIR)
-LIBRARY	= -L$(MLX_DIR) -libmlx_Linux -lXert -lX11 -lm -lz
+LIBRARY	= -L$(MLX_DIR) -lmlx_Linux -lXext -lX11 -lm -lz
 
-SRC_DIR		= ./srcs/
+SRCS_DIR	= ./srcs/
 SRCS_LIST	= init.c loop.c draw.c\
-			  raycast.c input.c util.c
+			  raycast.c input.c util.c\
+			  texture.c
 SRCS = $(addprefix $(SRCS_DIR), $(SRCS_LIST))
 
-MAIN	= $(addprefix $(SRC_DIR), main.c)
+MAIN	= $(addprefix $(SRCS_DIR), main.c)
 
-OBJ_DIR		= ./objs/
-OBJS		= $(addprefix $(OBJ_DIR), $(SRCS_LIST:.c=.o))
+OBJS_DIR	= ./objs/
+OBJS		= $(addprefix $(OBJS_DIR), $(SRCS_LIST:.c=.o))
 
 all	: $(NAME)
 
-$(NAME)	: $(MLX) $(OBJ_DIR) $(OBJS)
-	$(CC) $(CFLAGS) $(INCLUDE) $(OBJS) $(LIBRARY) -o $@
+$(NAME)	: $(MLX) $(OBJS_DIR) $(OBJS) $(MAIN)
+	$(CC) $(CFLAGS) $(INCLUDE) $(OBJS) $(MAIN) $(LIBRARY) -o $@
 
-$(OBJ_DIR) : $(SRC_DIR)
+$(OBJS_DIR) : $(SRCS_DIR)
 	@if [ ! -d "$(OBJS_DIR)" ]; then\
 		mkdir -p $@;\
 	fi
 
-$(OBJ_DIR)$.o : $(SRCS_DIR)%.c $(HEADER)
+$(OBJS_DIR)%.o : $(SRCS_DIR)%.c $(HEADER)
 	$(CC) $(CFLAGS) $(INCLUDE) -c $< -o $@
 
 $(MLX) : clone_mlx
@@ -51,7 +52,7 @@ clone_mlx :
 	fi
 
 clean :
-	$(RM) $(OBJ_DIR)
+	$(RM) $(OBJS_DIR)
 	@if [ -d "$(MLX_DIR)" ]; then\
 		$(MAKE) -C $(MLX_DIR) clean;\
 	fi

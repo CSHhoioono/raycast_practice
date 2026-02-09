@@ -27,6 +27,9 @@ int	app_init(t_app *a)
 	if (!img_init(a))
 		return (0);
 
+	if (!load_textures(a))
+		return (0);
+
 	// the initial value of player is the point of empty space
 	a->p.x = 3.5;
 	a->p.y = 3.5;

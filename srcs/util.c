@@ -1,6 +1,6 @@
 #include "app.h"
 
-const char *g_map[MAP_HH] = {
+const char *g_map[MAP_HEIGHT] = {
 	"111111111111111111111111",
 	"100000000000000000000001",
 	"101111111011111111110101",
