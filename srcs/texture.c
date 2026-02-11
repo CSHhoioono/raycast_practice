@@ -5,7 +5,7 @@ static int	load_one(t_app *a, t_tex *t, const char *path)
 	t->img = mlx_xpm_file_to_image(a->mlx, (char *)path, &t->w, &t->h);
 	if (!t->img)
 		return (0);
-	t->addr = ml_get_data_addr(t->img, &t->bpp, &t->line_len, &t->endian);
+	t->addr = mlx_get_data_addr(t->img, &t->bpp, &t->line_len, &t->endian);
 	if (!t->addr)
 		return (0);
 	return (1);

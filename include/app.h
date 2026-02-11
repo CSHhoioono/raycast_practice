@@ -32,10 +32,10 @@ typedef struct	s_tex
 
 enum e_tex_id
 {
-	TEX_N = 0;
-	TEX_S = 1;
-	TEX_W = 2;
-	TEX_E = 3;
+	TEX_N = 0,
+	TEX_S = 1,
+	TEX_W = 2,
+	TEX_E = 3
 };
 
 typedef struct s_img
@@ -81,7 +81,7 @@ int	app_init(t_app *a);
 
 /* texture */
 int	load_textures(t_app *a);
-int	free_textures(t_app *a);
+void	free_textures(t_app *a);
 
 /* loop */
 int	on_loop(t_app *a);

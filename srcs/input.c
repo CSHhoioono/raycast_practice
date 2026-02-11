@@ -25,7 +25,7 @@ int on_key_release(int keycode, t_app *a)
 
 int	on_destroy(t_app *a)
 {
-	(void)a;
+	free_textures(a);
 	exit(0);
 	return (0);
 }

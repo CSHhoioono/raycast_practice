@@ -2,8 +2,8 @@
 
 static void	move_player(t_app *a)
 {
-	const double	move_spd = 0.06;
-	const double	rot_spd = 0.045;
+	const double	move_spd = 0.01;
+	const double	rot_spd = 0.005;
 
 	double	nx;
 	double	ny;
@@ -17,7 +17,9 @@ static void	move_player(t_app *a)
 	{
 		nx = a->p.x + a->p.dirx * move_spd;
 		ny = a->p.y + a->p.diry * move_spd;
+		// y는 고정하고 이동한 x의 값이 범위를 넘어갔는지 확인.
 		if (!is_wall((int)nx, (int)a->p.y)) a->p.x = nx;
+		// x는 고정하고 이동한 y의 값이 범위를 넘어갔는지 확인.
 		if (!is_wall((int)a->p.x, (int)ny)) a->p.y = ny;
 	}
 	if (a->key_s)
@@ -41,7 +43,7 @@ static void	move_player(t_app *a)
 		if (!is_wall((int)nx, (int)a->p.y)) a->p.x = nx;
 		if (!is_wall((int)a->p.x, (int)ny)) a->p.y = ny;
 	}
-
+	//mlx와 math의 좌표계는 차이가 있음 그로 인해서 left는 양의 방향이 아닌 음의 방향으로 움직임.
 	if (a->key_left || a->key_right)
 	{
 		double	ang = (a->key_left ? -rot_spd : rot_spd);
