@@ -33,6 +33,7 @@ static void	draw_textured_wall(t_app *a, int x, int draw_start, int draw_end,\
 
 	// 화면 y=draw_start가 텍스쳐 y 어디서 시작하는지
 	double	tex_pos = 0.0;
+	if (draw_start < 0) tex_pos = (double)((-1) * draw_start) * step;
 	(void)perpwalldist;
 	
 	for (int y = draw_start; y <= draw_end; y++)
