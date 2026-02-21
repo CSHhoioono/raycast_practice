@@ -8,8 +8,8 @@
 # include "mlx.h"
 # include "map.h"
 
-# define WIN_WIDTH 800
-# define WIN_HEIGHT 450
+# define WIN_WIDTH 1920
+# define WIN_HEIGHT 1090
 
 # define K_ESC 65307
 # define K_W 119

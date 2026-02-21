@@ -2,8 +2,8 @@
 
 static void	move_player(t_app *a)
 {
-	const double	move_spd = 0.01;
-	const double	rot_spd = 0.005;
+	const double	move_spd = 0.05;
+	const double	rot_spd = 0.03;
 
 	double	nx;
 	double	ny;

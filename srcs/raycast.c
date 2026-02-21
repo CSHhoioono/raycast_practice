@@ -127,9 +127,6 @@ void	raycast_frame(t_app *a)
 		else
 			perpwalldist = (mapy - a->p.y + (1 - stepy) / 2.0) / raydiry;
 
-		if (perpwalldist < 0.2)
-			perpwalldist = 0.2;
-
 		int	line_h = (int)(WIN_HEIGHT / perpwalldist);
 		int	draw_start = -line_h / 2 + WIN_HEIGHT / 2;
 		int	draw_end = line_h / 2 + WIN_HEIGHT / 2;
