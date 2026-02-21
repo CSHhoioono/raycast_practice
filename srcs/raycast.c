@@ -122,6 +122,7 @@ void	raycast_frame(t_app *a)
 
 		// 카메라에 수직인 거리(피쉬아이 보정)
 		double	perpwalldist;
+
 		if (side == 0)
 			perpwalldist = (mapx - a->p.x + (1 - stepx) / 2.0) / raydirx;
 		else
