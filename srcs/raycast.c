@@ -28,13 +28,11 @@ static void	draw_textured_wall(t_app *a, int x, int draw_start, int draw_end,\
 	t_tex	*t = &a->tex[tex_id];
 
 	// 벽 높이에 맞춰 y 샘플링 스텝
-	double	line_h = (double)(draw_end - draw_start + 1);
-	double	step = (double)t->h / line_h;
+	double	line_h = (double)(WIN_HEIGHT / perpwalldist);
+	double	step = (double)(t->h / line_h);
 
 	// 화면 y=draw_start가 텍스쳐 y 어디서 시작하는지
-	double	tex_pos = 0.0;
-	if (draw_start < 0) tex_pos = (double)((-1) * draw_start) * step;
-	(void)perpwalldist;
+	double	tex_pos = (draw_start - WIN_HEIGHT / 2.0 + line_h / 2.0) * step;
 	
 	for (int y = draw_start; y <= draw_end; y++)
 	{
@@ -127,6 +125,9 @@ void	raycast_frame(t_app *a)
 			perpwalldist = (mapx - a->p.x + (1 - stepx) / 2.0) / raydirx;
 		else
 			perpwalldist = (mapy - a->p.y + (1 - stepy) / 2.0) / raydiry;
+
+		if (perpwalldist <= 0.001)
+			perpwalldist = 0.001;
 
 		int	line_h = (int)(WIN_HEIGHT / perpwalldist);
 		int	draw_start = -line_h / 2 + WIN_HEIGHT / 2;
